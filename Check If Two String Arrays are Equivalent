@@ -1,0 +1,16 @@
+class Solution {
+public:
+    bool arrayStringsAreEqual(vector<string>& word1, vector<string>& word2) {
+        while(word1.size()>1){
+            word1[0] += word1[1];
+            word1.erase(word1.begin()+1);
+        }
+        cout<<word1[0];
+        while(word2.size()>1){
+            word2[0] += word2[1];
+            word2.erase(word2.begin()+1);
+        }
+        cout<<" "<<word2[0]<<endl;
+        return word1 == word2;
+    }
+};
