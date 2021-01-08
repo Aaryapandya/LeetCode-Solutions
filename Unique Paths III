@@ -1,0 +1,39 @@
+class Solution {
+    void dfs(vector<vector<int>>& grid, int i, int j, int n, int& count){
+        if(i>=grid.size() || i<0 || j<0 || j>=grid[0].size()) return;
+        if(grid[i][j]==-1) return;
+        if(grid[i][j]==2){
+            if(n==0){
+                count++;
+            }
+            return;
+        }
+        grid[i][j]=-1;
+        n = n-1;
+        dfs(grid,i,j-1,n,count);
+        dfs(grid,i,j+1,n,count);
+        dfs(grid,i-1,j,n,count);
+        dfs(grid,i+1,j,n,count);
+        
+        grid[i][j]=0;
+    }
+public:
+    int uniquePathsIII(vector<vector<int>>& grid) {
+        int n=0, i,j;
+        for(int r=0;r<grid.size();r++){
+            for(int c=0;c<grid[0].size();c++){
+                if(grid[r][c]==1){
+                    i=r;
+                    j=c;
+                }
+                else if(grid[r][c]!= -1 ){
+                          n++;
+                }
+            }
+        }
+        int count =0;
+        dfs(grid,i,j,n,count);
+        return count;
+    }
+};
+
