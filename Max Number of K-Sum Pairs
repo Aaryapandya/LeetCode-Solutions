@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int maxOperations(vector<int>& nums, int k) {
+         unordered_map<int, int> wub;
+        int ans = 0;
+        for (auto n:nums) {
+            if (wub[k-n]) {
+                wub[k-n]--;
+                ans++;
+            } 
+            else wub[n]++;
+        }
+        return ans;
+    }
+};
