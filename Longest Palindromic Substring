@@ -1,0 +1,28 @@
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int i = 0;
+        int mx = 0;
+        int st = 0;
+        while(i < s.length()){
+            int curr = 0;
+            int start = i;
+            int end = i;
+            while(end + 1 < s.length() && s[end] == s[end+1]){//for example "bbb"
+                end++;
+            }
+            i = end + 1;
+            while(end+1<s.length() && start-1 >= 0 && s[end+1] == s[start-1]){//check palindrom
+                start--;
+                end++;
+            }
+            curr = (end - start)+1;
+            if(curr > mx){
+                mx = curr;
+                st = start;
+            }
+        }
+        string ans = s.substr(st,mx);
+        return ans;
+    }
+};
