@@ -1,0 +1,55 @@
+class Solution {
+public:
+    bool closeStrings(string word1, string word2) {
+        if(word1.length()!=word2.length()) return 0;
+        if(word1 == word2) return 1;
+        vector<int> freq1, freq2;
+        vector<char> letter1, letter2;
+        sort(word1.begin(), word1.end());
+        sort(word2.begin(), word2.end());
+        int c = 1, i=0;
+        char ch;
+        for(i=0;i<word1.length()-1;i++){
+            if(word1[i]!=word1[i+1]){
+                ch = word1[i];
+                letter1.push_back(word1[i]);
+                freq1.push_back(c);
+                c = 1;
+            }
+            else{
+                c++;
+            }
+        }
+        letter1.push_back(word1[i]);
+        if(word1[i]!=word1[i-1]){
+            freq1.push_back(1);
+        }
+        else{
+            freq1.push_back(c);
+        }
+        c = 1;
+        for(i=0;i<word2.length()-1;i++){
+            if(word2[i]!=word2[i+1]){
+                letter2.push_back(word2[i]);
+                freq2.push_back(c);
+                c = 1;
+            }
+            else{
+                c++;
+            }
+        }
+        letter2.push_back(word2[i]);
+        if(word2[i]!=word2[i-1]){
+            freq2.push_back(1);
+        }
+        else{
+            freq2.push_back(c);
+        }
+        sort(letter1.begin(), letter1.end());
+        sort(freq1.begin(), freq1.end());
+        sort(letter1.begin(), letter1.end());
+        sort(freq2.begin(), freq2.end());
+        
+        return (letter1 == letter2) && (freq1 == freq2);
+    }
+};
