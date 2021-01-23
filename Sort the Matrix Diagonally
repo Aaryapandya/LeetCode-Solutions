@@ -1,0 +1,55 @@
+class Solution {
+public:
+    vector<vector<int>> diagonalSort(vector<vector<int>>& mat) {
+        for(int g=0;g<mat[0].size();g++){
+            int i=0;
+            int j=g;
+            
+            vector<int> v;
+            while(i<mat.size() && j<mat[0].size()){
+                v.push_back(mat[i][j]);
+                i++;
+                j++;
+            }
+            
+            sort(v.begin(),v.end());
+            i=0;
+            j=g;
+            int idx = 0;
+            while(i<mat.size() && j<mat[0].size()){
+                mat[i][j] = v[idx];
+                i++;
+                j++;
+                idx++;
+            }
+            
+        }
+        
+        
+        //lower triangle
+        for(int g=mat.size()-2;g>0;g--){
+            int i=g;
+            int j=0;
+            
+            vector<int> v;
+            while(i<mat.size() && j<mat[0].size()){
+                v.push_back(mat[i][j]);
+                i++;
+                j++;
+            }
+            
+            sort(v.begin(),v.end());
+            i=g;
+            j=0;
+            int idx = 0;
+            while(i<mat.size() && j<mat[0].size()){
+                mat[i][j] = v[idx];
+                i++;
+                j++;
+                idx++;
+            }
+        }
+
+        return mat;
+    }
+};
