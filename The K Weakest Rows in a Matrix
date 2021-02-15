@@ -1,0 +1,29 @@
+bool compare(pair<int, int> a, pair<int, int> b){
+    return (a.second == b.second)? a.first < b.first:a.second < b.second;
+}
+
+class Solution {
+public:
+    vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
+        vector<pair<int, int>> ans;
+        vector<int> sol;
+        int i = 0, j = 0, c = 0;
+		
+        for( i = 0 ; i < mat.size(); i++){
+            ans.push_back(make_pair(-1,0));
+            for( j = 0 ; j < mat[i].size(); j++){
+                ans[i].first = i;
+                if(mat[i][j] == 1) ans[i].second++;
+            }
+        }
+		
+        sort(ans.begin(), ans.end(), compare);
+        
+        i = 0;
+        while(i<k){
+            sol.push_back(ans[i].first);
+            i++;
+        }
+        return sol;
+    }
+};
