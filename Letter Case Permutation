@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<string> letterCasePermutation(string S) {
+        int m=S.size();
+        vector<string>ans;  
+        ans.push_back(""); 
+		
+        for(int i=0;i<m;i++){
+            if(isalpha(S[i])){   
+                int n=ans.size();
+                for(int j=0;j<n;j++){
+                    string temp1,temp2;
+                    temp1= tolower(S[i]);
+                    temp2= toupper(S[i]);
+                    ans.push_back(ans[j]+temp1);
+                    ans[j]=ans[j]+temp2;
+                }
+            }	
+            else{ 
+                int n=ans.size();
+                for(int j=0;j<n;j++){
+                    ans[j]=ans[j]+S[i];
+                }
+            }
+			
+        }
+        return ans;
+    }
+};
