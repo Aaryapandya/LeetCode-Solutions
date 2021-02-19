@@ -1,0 +1,31 @@
+class Solution {
+public:
+    string minRemoveToMakeValid(string s) {
+        stack<pair<int, char> > stk;
+		
+        for(int i=0; i<s.length(); i++){
+            if(s[i] == '('){
+                stk.push(make_pair(i, '('));
+            }else if(s[i] == ')'){
+                if(stk.empty()){
+                    s[i] = '1';
+                }else{
+                    stk.pop();
+                }
+            }
+        }
+        while(!stk.empty()){
+            pair<int, char> TOP = stk.top();
+            s[TOP.first] = '1';
+            stk.pop();
+        }
+		string output = "";
+        for(int i=0; i<s.length(); i++){
+            if(s[i] != '1'){
+                output.push_back(s[i]);
+            }
+        }
+        
+        return output;
+    }
+};
