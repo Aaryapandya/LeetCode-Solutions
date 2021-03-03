@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> tmp(n+1,0);
+        for(int i: nums){
+            tmp[i]++;
+        }
+        for(int i=0;i<n+1;i++){
+            if(tmp[i]==0){
+                return i;
+            }
+        }
+        return -1;
+    }
+};
