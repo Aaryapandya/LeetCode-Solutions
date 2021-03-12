@@ -1,0 +1,15 @@
+class Solution {
+public:
+     bool hasAllCodes(string str, int k) {
+        int n = str.length();
+        if(n<k) return false;
+        unordered_set<string>s;
+        for(int i=0;i<=n-k;i++){
+            if(s.find(str.substr(i,k)) == s.end()){
+                s.insert(str.substr(i,k));
+            }
+        }
+        if(s.size() == pow(2,k)) return true;
+        return false;
+    }
+};
