@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int secondHighest(string s) {
+        vector<int> arr;
+        for(char ch: s){
+            if(ch>='0' && ch<='9'){
+                if(find(arr.begin(), arr.end(), ch-'0')==arr.end()){
+                    arr.push_back(ch-'0');
+                }
+            }
+        }
+        if(arr.size()<=1)
+            return -1;
+        sort(arr.begin(), arr.end());
+        return arr[arr.size()-2];
+    }
+};
