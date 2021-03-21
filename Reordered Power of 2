@@ -1,0 +1,28 @@
+class Solution {
+    bool check(string s){
+        int n = stoi(s);
+        while(n>1){
+            if(n%2){
+                return false;
+            }
+            n/=2;
+        }
+        return true;
+    }
+public:
+    bool reorderedPowerOf2(int N) {
+        if(N<=2) return true;
+        string s = to_string(N);
+        sort(s.begin(), s.end());
+        do{
+            if(s[0]=='0'){
+                continue;
+            }
+            bool power_of_2 = check(s);
+            if(power_of_2){
+                return true;
+            }
+        }while(next_permutation(s.begin(), s.end()));
+        return false;
+    }
+};
