@@ -1,0 +1,32 @@
+class Solution {
+public:
+    bool isNStraightHand(vector<int>& hand, int W) {
+        int n=hand.size();
+        
+        if(n%W) return false;
+        
+        if(W==1) return true;
+        
+        sort(hand.begin(), hand.end());
+        map<int,int> m;
+        for(int i: hand){
+            m[i]++;
+        }
+        for(auto it:m)
+        {
+            if(it.second>0){
+                int next=it.first+1;
+                int x=it.second;
+                for(int j=1;j<W;j++){
+                    if(m[j+it.first]<x){
+                        return false;
+                    }
+                    else{
+                        m[j+it.first]-=x;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+};
