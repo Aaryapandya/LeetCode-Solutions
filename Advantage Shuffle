@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<int> advantageCount(vector<int>& A, vector<int>& B) {
+        sort(A.begin(), A.end());
+        vector<int> res;
+        for(int i: B){
+            int f=0;
+            for(int j=0;j<A.size();j++){
+                if(A[j]>i){
+                    res.push_back(A[j]);
+                    A.erase(A.begin()+j);
+                    f=1;
+                    break;
+                }
+            }
+            if(f==0){
+                res.push_back(A[0]);
+                A.erase(A.begin());
+            }
+        }
+        return res;
+    }
+};
