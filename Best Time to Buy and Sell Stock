@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
+        int n=prices.size();
+        if(n<=1)
+            return 0;
+        int min = prices[0], profit=0, max;
+        for(int i=1;i<n;i++){
+            if(min>=prices[i]){
+                min = prices[i];
+            }
+            else{
+                max = prices[i];
+                if((max-min)>profit){
+                    profit = max - min;
+                }
+            }
+        }
+        
+        return profit;
+    }
+};
