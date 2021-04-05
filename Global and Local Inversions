@@ -1,0 +1,18 @@
+class Solution {
+public:
+    bool isIdealPermutation(vector<int>& A) {
+        int g=0, l=0, n=A.size();
+        if(n<=2)
+            return true;
+        if(A[0]!=0 && A[1]!=0)
+            return false;
+        for(int i=1;i<n-1;i++){
+            if(A[i]==i || A[i+1]==i || A[i-1]==i)
+                continue;
+            return false;
+        }
+        if(A[n-2]!=n-1 && A[n-1]!=n-1)
+            return false;
+        return true;
+    }
+};
