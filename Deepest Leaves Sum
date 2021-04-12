@@ -1,0 +1,35 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+    int height(TreeNode* root){
+        if(root==nullptr)
+            return 0;
+        int suml = height(root->left)+1;
+        int sumr = height(root->right)+1;
+        return max(suml, sumr);
+    }
+    void dfs(TreeNode* root, int h, int& sum, int i){
+        if(root==nullptr)
+            return;
+        if(h==i)
+            sum+=root->val;
+        dfs(root->left, h, sum, i+1);
+        dfs(root->right, h, sum, i+1);
+    }
+public:
+    int deepestLeavesSum(TreeNode* root) {
+        int h = height(root);
+        int sum=0;
+        dfs(root, h, sum, 1);
+        return sum;
+    }
+};
