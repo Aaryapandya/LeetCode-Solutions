@@ -1,0 +1,50 @@
+class Solution {
+public:
+    int numSubmatrixSumTarget(vector<vector<int>>& matrix, int target) {
+        int R,C,Ans,Ans1,Ans2=0,i,j,k,l,S;
+        vector<vector<int>> E;
+        R=matrix.size();
+        C=matrix[0].size();
+        for(i=0;i<R;i++)
+        {
+            vector<int> F;
+            S=0;
+            for(j=0;j<C;j++)
+            {
+                S+=matrix[i][j];
+                F.push_back(S);
+            }
+            E.push_back(F);
+        }
+        for(i=0;i<R;i++)
+        {
+            for(j=0;j<C;j++)
+            {
+                S=0;
+                for(k=j;k<C;k++)
+                {
+                    if(j==0)
+                    Ans=E[i][k];
+                    else
+                    Ans=E[i][k]-E[i][j-1];
+                    if(k==(C-1))
+                    S+=Ans; 
+                    Ans1=Ans;
+                    for(l=i;l<R;l++)
+                    {
+                        if(l!=i)
+                        {
+                            if(j==0)
+                            Ans1+=E[l][k];
+                            else
+                            Ans1+=(E[l][k]-E[l][j-1]);    
+                        }
+                        if(Ans1==target)
+                            ++Ans2;
+                    }
+                }
+            }
+        }
+        return Ans2;
+    }
+};
