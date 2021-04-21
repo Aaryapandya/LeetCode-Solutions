@@ -1,0 +1,21 @@
+class Solution {
+    int minimum(vector<vector<int>>& t, int i, int j, int** dp){
+        int n=t.size();
+        if(i==n) return 0;
+        if(dp[i][j]!=-1) return dp[i][j];
+        int op1 = t[i][j] + minimum(t, i+1, j, dp);
+        int op2 = t[i][j+1] + minimum(t, i+1, j+1, dp);
+        dp[i][j] = min(op1, op2);
+        return dp[i][j];
+    }
+public:
+    int minimumTotal(vector<vector<int>>& t) {
+        int n = t.size();
+        int** dp = new int* [n];
+        for(int i=0;i<n;i++){
+            dp[i] = new int [i+1];
+            for(int j=0;j<i;j++) dp[i][j] = -1;
+        }
+        return minimum(t, 1, 0, dp) + t[0][0];
+    }
+};
