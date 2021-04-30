@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> powerfulIntegers(int x, int y, int bound) {
+        if(x==1 && y==1 && bound>=2)
+            return {2};
+        vector<int> res;
+        for(int i=0;;i++){
+            if(pow(y,i)>bound){
+                break;
+            }
+            for(int j=0;;j++){
+                if(pow(x,j)>bound)
+                    break;
+                int sum = pow(x,j)+pow(y,i);
+                if(sum > bound)
+                    break;
+                if(find(res.begin(), res.end(), sum)==res.end())
+                    res.push_back(sum);
+                if(x==1)
+                    break;
+            }
+            if(y==1)
+                break;
+        }
+        return res;
+    }
+};
