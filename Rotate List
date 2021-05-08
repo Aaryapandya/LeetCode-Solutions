@@ -1,0 +1,32 @@
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        // handle special case length = 0 or 1
+        if (head == nullptr || head->next == nullptr) return head;
+
+        // calculate length
+        int length = 1;
+        ListNode* tail = head;
+        while (tail->next != nullptr)
+        {
+            tail = tail->next;
+            length ++;
+        }
+        
+        //recalcualte the length
+        k = k % length;
+        if (k == 0) return head;
+        
+        ListNode* newHead = head;
+        ListNode* newTail = head;; 
+        while (length > k)
+        {
+            newTail = newHead;
+            newHead = newHead->next;
+            length --;
+        }
+        newTail->next = nullptr;
+        tail->next = head;
+        return newHead;
+    }
+};
