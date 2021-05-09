@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int trap(vector<int>& h) {
+        int l=0, r=h.size()-1, lm=0, rm=0, sum=0; 
+        while(l<=r){
+            lm=max(lm,h[l]);  
+            rm=max(rm,h[r]); 
+            if(lm<rm){
+                sum+=(lm-h[l]);
+				l++;
+            }
+            else{
+                sum+=(rm-h[r]); 
+                r--;
+            }
+        }
+        return sum;    
+    }
+};
