@@ -1,0 +1,9 @@
+class Solution {
+public:
+    int maxScore(vector<int>& cp, int k) {
+        int sum = accumulate(cp.begin(), cp.begin() + k, 0), ans = sum;
+	    for(int l=k-1, r=cp.size()-1; l >= 0; l--, r--)
+		    ans = max(ans, sum += (cp[r] - cp[l]));
+	    return ans;
+    }
+};
