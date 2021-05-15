@@ -1,0 +1,24 @@
+class Solution {
+public:
+    string sortSentence(string s) {
+        vector<string> v(200,"");
+        string res, tmp="";
+        int i=0;
+        for(char ch: s){
+            if((ch>='a' && ch<='z') || (ch>='A' && ch<='Z')){
+                tmp+=ch;
+            }
+            else if(ch>='0' && ch<='9'){
+                v[ch-'0'-1]=tmp;
+                i++;
+            }
+            else{
+                tmp="";
+            }
+        }
+        for(int j=0;j<i-1;j++)
+            res+=v[j], res+=" ";
+        res+=v[i-1];
+        return res;
+    }
+};
