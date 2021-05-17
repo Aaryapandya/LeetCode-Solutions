@@ -1,0 +1,55 @@
+class Solution {
+public:
+    int minSwaps(string s) {
+        int c1=0, c0=0, n=s.length();
+        string tmp=s;
+        for(int i=0;i<n;i++){
+            if(s[i]=='1'){
+                c1++;
+            }
+            else{
+                c0++;
+            }
+        }
+        if(c1>(n+1)/2 || c0>(n+1)/2)
+            return -1;
+        int swap1=0, swap2=0,s10=0, s11=0, s20=0, s21=0;
+        string s1=s, s2=s;
+        for(int i=0;i<n;i++){
+            if(i%2){
+                s1[i]='1';
+                s2[i]='0';
+                s11++;
+                s20++;
+            }
+            else{
+                s1[i]='0';
+                s2[i]='1';
+                s10++;
+                s21++;
+            }
+        }
+        if(s11==c1 && s10==c0){
+            for(int i=0;i<n;i++){
+                if(s[i]!=s1[i])
+                    swap1++;
+            }
+        }
+        else{
+            swap1=INT_MAX;
+        }
+        swap1/=2;
+        if(s21==c1 && s20==c0){
+            for(int i=0;i<n;i++){
+                if(s[i]!=s2[i])
+                    swap2++;
+            }
+        }
+        else{
+            swap2=INT_MAX;
+        }
+        swap2/=2;
+        cout<<swap1<<" "<<swap2<<endl;
+        return min(swap1, swap2);
+    }
+};
