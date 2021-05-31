@@ -1,0 +1,38 @@
+class Solution {
+    int bs(vector<string> p, string s){
+        int l=s.length();
+        for(int i=0;i<p.size();i++){
+          //  cout<<p[i].substr(0,l)<<" ";
+            if(p[i].substr(0,l)==s){            
+                return i;
+            }
+        }
+        return -1;
+    }
+public:
+    vector<vector<string>> suggestedProducts(vector<string>& products, string sw) {
+        vector<vector<string>> res;
+        vector<string> tmp;
+        sort(products.begin(), products.end());
+        string s;
+        for(int i=0;i<sw.length();i++){
+            s+=sw[i];
+            int j=bs(products, s);
+            if(j==-1){
+                break;
+            }
+                
+            for(int k=j;k<products.size()&&k<j+3;k++){
+                if(products[k].substr(0,s.length())==s)
+                    tmp.push_back(products[k]);
+            }
+            res.push_back(tmp);
+            tmp.clear();
+        }
+        if(res.size()!=sw.length()){
+            for(int i=res.size(); i<sw.length(); i++)
+               res.push_back({});
+        }
+        return res;
+    }
+};
