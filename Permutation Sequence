@@ -1,0 +1,11 @@
+class Solution {
+public:
+    string getPermutation(int n, int k) {
+        string s="",p;
+        for(char i='1';i<'1'+n;i++)
+            s+=i;
+        --k;
+        while(next_permutation(s.begin(), s.end()) && --k);
+        return s;
+    }
+};
