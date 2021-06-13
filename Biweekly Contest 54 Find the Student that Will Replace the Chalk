@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int chalkReplacer(vector<int>& chalk, int k) {
+        long long int sum = 0; 
+        int index;
+        sum = accumulate(chalk.begin(), chalk.end(), sum);
+        int remain = k%sum;
+        cout<<remain<<" ";
+        for(int i=0;i<chalk.size();i++){
+            if(chalk[i]>remain)
+                return i;
+            remain-=chalk[i];
+        }
+        return 0;
+    }
+};
