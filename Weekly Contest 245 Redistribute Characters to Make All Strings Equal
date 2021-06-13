@@ -1,0 +1,17 @@
+class Solution {
+public:
+    bool makeEqual(vector<string>& words) {
+        vector<int> v(26,0);
+        int n=words.size();
+        for(auto w: words){
+            for(char ch: w){
+                v[ch-'a']++;
+            }
+        }
+        for(int i: v){
+            if(i%n)
+                return false;
+        }
+        return true;
+    }
+};
