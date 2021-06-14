@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int maximumUnits(vector<vector<int>>& bt, int size) {
+        for(int i=0;i<bt.size();i++){
+            swap(bt[i][0], bt[i][1]);
+        }
+        sort(bt.begin(), bt.end());
+        int res=0, type;
+        for(int i=bt.size()-1;i>=0; i--){
+           // cout<<bt[i][0]<<" "<<bt[i][1]<<" "<<res<<endl;
+            if(bt[i][1]<size){
+                res+=(bt[i][0]*bt[i][1]);
+                size-=bt[i][1];
+            }
+            else{
+                res+=(size*bt[i][0]);
+                break;
+            }
+        }
+        return res;
+    }
+};
