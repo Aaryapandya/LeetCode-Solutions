@@ -1,0 +1,20 @@
+class Solution {
+    vector<string> ans;
+    void makeValidStrings(int n,int openBracketCount,int closeBracketCount,string helperString = ""){
+        if(closeBracketCount==n){
+            ans.push_back(helperString);
+            return;
+        }
+        if(closeBracketCount<openBracketCount)
+            makeValidStrings(n,openBracketCount,closeBracketCount+1,helperString+")");
+        if(openBracketCount<n)
+            makeValidStrings(n,openBracketCount+1,closeBracketCount,helperString+"(");
+    }
+    
+public:
+    vector<string> generateParenthesis(int n) {
+        ans.clear();
+        makeValidStrings(n,0,0);
+        return ans;
+    }
+};
