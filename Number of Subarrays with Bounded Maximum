@@ -1,0 +1,32 @@
+class Solution {
+    int fact(int n){
+        return n*(n+1)/2;
+    }
+public:
+    int numSubarrayBoundedMax(vector<int>& nums, int left, int right){
+        long res = 0, exc = 0, inc = 0;
+ 
+        for (int i = 0; i < nums.size(); i++){
+
+            if (nums[i] > right){
+                res += (fact(inc) - fact(exc));
+                inc = 0;
+                exc = 0;
+            }
+ 
+            else if (nums[i] < left){
+                exc++;
+                inc++;
+            }
+            
+            else{
+                res -= fact(exc);
+                exc = 0;
+                inc++;
+            }
+        }
+        
+        res += (fact(inc) - fact(exc));
+        return res;
+    }
+};
