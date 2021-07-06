@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int minSetSize(vector<int>& arr) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+        int res=0, n=arr.size()/2;
+        vector<int> m(100001, 0);
+        for(int i: arr){
+            m[i]++;
+            if(m[i]>=n)
+                return 1;
+        }
+        sort(m.begin(), m.end(), greater<int>());
+        for(int i=0;i<100001; i++){
+            n-=m[i];
+            if(n<=0)
+                return i+1;
+        }
+        return n;
+    }
+};
