@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+        
+        auto end = lower_bound(arr.begin(), arr.end(), x);
+        auto start = end - 1;
+        
+        while(k--) {
+            if (end == arr.end() or (start >= arr.begin() and x-(*start) <= (*end)-x)) 
+                start--;
+            else 
+                end++;
+        }
+        vector<int> ans;
+        for(auto i=start+1;i!=end;i++)
+            ans.push_back(*i);
+        return ans;
+    }
+};
