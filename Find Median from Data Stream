@@ -1,0 +1,42 @@
+class MedianFinder {
+    vector<double> v;
+public:
+    /** initialize your data structure here. */
+    MedianFinder() {  
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    } 
+    
+    void addNum(int num) {
+        if(v.size()==0){
+            v.push_back(num);
+            return;
+        }
+        if(num<v[0]){
+            v.insert(v.begin(), num);
+            return;
+        }
+        if(v[v.size()-1]<num){
+            v.push_back(num);
+            return;
+        }
+        auto it = upper_bound(v.begin(), v.end(), num);
+        v.insert(it, num);
+    }
+    
+    double findMedian() {
+        if(v.size()%2){
+            return v[v.size()/2];
+        }
+        else{
+            return (v[v.size()/2] + v[v.size()/2 - 1])/2;
+        }
+    }
+};
+
+/**
+ * Your MedianFinder object will be instantiated and called as such:
+ * MedianFinder* obj = new MedianFinder();
+ * obj->addNum(num);
+ * double param_2 = obj->findMedian();
+ */
