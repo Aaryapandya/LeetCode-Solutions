@@ -1,0 +1,64 @@
+class Solution {
+public:
+    int ans=0;
+    int dx[4]={1,-1,0,0};
+    int dy[4]={0,0,1,-1};
+    int visit[501][501];
+    map<int,int>mp;
+    int val=2;
+    int n;
+    void dfs(int x,int y,vector<vector<int>>& grid)
+    {
+        visit[x][y]=1;
+        ans++;
+		//marking the color
+        grid[x][y]=val;
+        for(int i=0;i<4;i++){
+            int newx=x+dx[i];
+            int newy=y+dy[i];
+            if(newx>=0&&newx<n&&newy>=0&&newy<n&&!visit[newx][newy]&&grid[newx][newy]==1){
+                dfs(newx,newy,grid);
+            }
+        }
+        return;
+        
+        
+    }
+    int largestIsland(vector<vector<int>>& grid) {
+        n=grid.size();
+        int maxi=1;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(!visit[i][j]&&grid[i][j]==1){
+                    dfs(i,j,grid);
+					//marking size of each color island
+                    mp[val]=ans;
+                    ans=0;
+                    val++;
+                    
+                }
+            }
+        }
+        if(mp.count(2))
+        maxi=mp[2];
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                ans=0;
+                set<int>s;
+                if(grid[i][j]==0)
+                {for(int kk=0;kk<4;kk++){
+                    int newx=i+dx[kk];
+                    int newy=j+dy[kk];
+                    if(newx>=0&&newy<n&&newx<n&&newy>=0&&grid[newx][newy]>0&&s.find(grid[newx][newy])==s.end()){
+                        ans+=mp[grid[newx][newy]];
+                        s.insert(grid[newx][newy]);
+                    }
+                }
+                maxi=max(maxi,ans+1);}
+            }
+        }
+                    
+        return maxi;
+    }
+};
