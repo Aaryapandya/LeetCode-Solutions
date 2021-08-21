@@ -1,0 +1,36 @@
+class Solution {
+    public:
+        void solveSudoku(vector<vector<char>>& board) {
+            solve(board , 0 , 0);
+        }
+    private:
+        bool solve(vector<vector<char>>& board , int i , int j) {
+            if(i == 9 && j == 0) 
+                return true;
+            if(board[i][j] != '.') 
+                return solve(board, (j+1) == 9? i+1 : i, (j+1) == 9? 0 : j+1);
+
+            for(char num = '1'; num <= '9'; num++) {
+                if(isValid(board, i, j, num)){
+                    board[i][j] = num;
+                    if(solve(board, (j+1) == 9? i+1 : i, (j+1) == 9? 0 : j+1)) 
+                        return true;
+                    board[i][j] = '.';
+                }
+            }
+            return false;
+        }
+        bool isValid(vector<vector<char>>& board, int r, int c, char d) {
+            int allrow = 3 * (r / 3);
+            int allcol = 3 * (c / 3);
+            for (int i = 0; i < 9; i++) {
+                if (board[i][c] == d) 
+                    return false; //check row
+                if (board[r][i] == d) 
+                    return false; //check column
+                if (board[allrow + i / 3][allcol + i % 3] == d) 
+                    return false; //check 3*3 block
+            }
+            return true;
+        }
+    };
