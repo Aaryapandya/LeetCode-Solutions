@@ -1,0 +1,11 @@
+class Solution {
+public:
+    string shiftingLetters(string s, vector<int>& shifts) {
+        int n = shifts.size(), times=0; 
+        for(int i=n-1; i>=0 ; i--){
+            times = (times + shifts[i])%26;
+            s[i] = (s[i]-'a'+times)%26 + 'a';
+        }
+        return s;
+    }
+};
