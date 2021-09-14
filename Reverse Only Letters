@@ -1,0 +1,17 @@
+class Solution {
+public:
+    string reverseOnlyLetters(string s) {
+        string a="";
+        for(char ch: s){
+            if((ch>='a'&&ch<='z')||(ch>='A'&&ch<='Z'))
+                a+=ch;
+        }
+        for(int i=0,j=a.length()-1;i<s.length();i++){
+            if((s[i]>='a'&&s[i]<='z')||(s[i]>='A'&&s[i]<='Z')){
+                s[i] = a[j];
+                j--;
+            }
+        }
+        return s;
+    }
+};
