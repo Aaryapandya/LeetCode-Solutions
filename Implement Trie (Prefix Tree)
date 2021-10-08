@@ -1,0 +1,35 @@
+class Trie {
+    vector<string> v;
+public:
+    Trie() {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+    }
+    
+    void insert(string word) {
+        v.push_back(word);
+    }
+    
+    bool search(string word) {
+        return (find(v.begin(), v.end(), word)!=v.end());
+    }
+    
+    bool startsWith(string prefix) {
+        for(string s: v){
+            if(s==prefix)
+                return true;
+            string subs = s.substr(0, prefix.length());
+            if(subs==prefix)
+                return true;
+        }
+        return false;
+    }
+};
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie* obj = new Trie();
+ * obj->insert(word);
+ * bool param_2 = obj->search(word);
+ * bool param_3 = obj->startsWith(prefix);
+ */
