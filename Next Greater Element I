@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+        vector<int> ans(nums1.size());
+        for(int i=0; i<nums1.size(); i++){
+            auto it = find(nums2.begin(), nums2.end(), nums1[i]) - nums2.begin();
+            int res = -1;
+            for(int j=it+1; j<nums2.size(); j++){
+                if(nums2[j]>nums1[i]){
+                    ans[i] = nums2[j];
+                    res = 1;
+                    break;
+                }
+            }
+            if(res==-1)
+                ans[i] = -1;
+        }
+        return ans;
+    }
+};
