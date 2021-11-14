@@ -1,0 +1,36 @@
+class CombinationIterator {
+	public:
+		string str;
+		vector<int> index;
+		bool z=true;
+		CombinationIterator(string characters,int combinationLength){
+			str=characters;
+			for(int i=0;i<combinationLength;++i)
+				index.push_back(i);
+		}
+		string next(){
+			string ans="";
+			for(int e:index)
+				ans+=str[e];
+			int i=index.size()-1;
+			while(i>=0){
+				if(index[i]!=str.length()-index.size()+i)
+					break;
+				--i;
+			}
+			if(i==-1){
+				z=false;
+				return ans;
+			}
+			index[i]++;
+			++i;
+			while(i<index.size()){
+				index[i]=index[i-1]+1;
+				++i;
+			}
+			return ans;
+		}
+		bool hasNext(){
+			return z;
+		}
+};
