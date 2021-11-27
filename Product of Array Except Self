@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+        int t=nums[0], n=nums.size(), f=0, c=0;
+        vector<int> res(n,0);
+        for(int i=1; i<n; i++){
+            if(nums[i]==0){
+                f=i;
+                c++;
+            }
+            else
+                t*=nums[i];
+            if(c==2)
+                return res;
+        }
+        if(f){
+            res[f]=t;
+            return res;
+        }
+        for(int i=0;i<n;i++){
+            res[i] = t/nums[i];
+        }
+        return res;
+    }
+};
