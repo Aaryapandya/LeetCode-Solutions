@@ -1,0 +1,28 @@
+pair<int, int> recurse(TreeNode* node, int &res){
+    if(node == NULL)
+        return make_pair(0,0);
+    
+    pair<int, int> left = recurse(node->left, res);
+    pair<int, int> right = recurse(node->right, res);
+    
+    int excludingItself = left.first + right.first;
+    int includingItself = node->val + left.second + right.second;
+    int ans = max(excludingItself , includingItself);
+    res = max(ans, res);
+    
+    return make_pair(ans , excludingItself);
+}
+
+
+class Solution {
+public:
+    int rob(TreeNode* root) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        int res = 0;
+        if(root == NULL)
+            return 0;
+        recurse(root, res);
+        return res;
+    }
+};
