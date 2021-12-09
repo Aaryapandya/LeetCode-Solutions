@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool canReach(vector<int>& arr, int start) {
+      ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+      queue<int> q;
+      unordered_set<int> visit;
+      q.push(start);
+      int j1,j2,n=arr.size();
+      while(!q.empty()){
+        int cur = q.front();
+        q.pop();
+        if(arr[cur]==0) return true;
+        j1=cur-arr[cur]; j2=cur+arr[cur];
+        if(j1>=0 && !visit.count(j1)){
+          q.push(j1);
+          visit.insert(j1);
+        }
+        if(j2<n && !visit.count(j2)){
+          q.push(j2);
+          visit.insert(j2);
+        }
+      }
+      return false;
+    }
+};
