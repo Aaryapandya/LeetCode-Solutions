@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<vector<int>> minimumAbsDifference(vector<int>& arr) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
+        sort(arr.begin(), arr.end());
+         vector<vector<int>> result;
+        if(arr.size()==2){
+            result.push_back(arr);
+            return result;
+        }
+        int mindiff=arr[1]-arr[0];
+        for(int i=0;i<arr.size()-1;i++){
+            mindiff=min(mindiff,(arr[i+1]-arr[i]));
+        }
+        for(int i=0;i<arr.size()-1;i++){
+            vector<int> temp;
+            if(arr[i+1]-arr[i]==mindiff){
+                temp.push_back(arr[i]);
+                temp.push_back(arr[i+1]);
+                result.push_back(temp);
+            }
+        }
+        return result;
+    }
+};
