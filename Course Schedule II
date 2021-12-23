@@ -1,0 +1,31 @@
+class Solution {
+    bool isloop(int u, vector<vector<int>>& near, vector<int>& a, vector<int>& visited){
+        visited[u] = 1;
+        for(int v: near[u]){
+            if(visited[v] == 1) return true;
+            if(visited[v] == 0 && isloop(v, near, a, visited)) return true;
+        }
+        visited[u] =2;
+        a.push_back(u);
+        return false;
+    }
+public:
+    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
+        
+        vector<vector<int>> near(numCourses);
+        for(vector<int>& courses: prerequisites)
+            near[courses[1]].push_back(courses[0]);
+            
+        vector<int> a;
+        vector<int> visited(numCourses, 0);
+        for(int i=0;i<numCourses;++i)
+            if(visited[i] == 0 && isloop(i, near, a, visited)) return {};
+        
+        reverse(a.begin(), a.end());
+        return a;
+        
+    }
+};
