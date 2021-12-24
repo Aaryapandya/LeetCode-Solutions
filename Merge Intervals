@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& inter) {
+        vector<vector<int>> res;
+        if(inter.size()==1)
+            return inter;
+        else if(inter.size()==2 && inter[0][1]<inter[1][0])
+            return inter;
+        sort(inter.begin(), inter.end());
+        int j=0;
+        for(int i=0;i<inter.size();i++){
+            if(inter[j][1]>=inter[i][0]){
+                inter[j][0] = min(inter[i][0], inter[j][0]);
+                inter[j][1] = max(inter[i][1], inter[j][1]);
+            }
+            else{
+                j++;
+                inter[j] = inter[i];
+            }
+        }
+        for(int i=0;i<=j;i++){
+            res.push_back(inter[i]);
+        }
+        return res;
+    }
+};
