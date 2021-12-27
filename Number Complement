@@ -1,0 +1,12 @@
+class Solution {
+public:
+    int findComplement(int num) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
+        
+        unsigned mask = ~0;
+        while( mask & num ) mask = mask << 1;
+        return ~num ^ mask;
+    }
+};
