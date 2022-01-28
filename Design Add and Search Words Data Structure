@@ -1,0 +1,44 @@
+class WordDictionary {
+    vector<WordDictionary*> ch;
+    bool isEndOfWord;
+public:
+    WordDictionary(): isEndOfWord(false) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
+        
+         ch = vector<WordDictionary*>(26, nullptr);
+    }
+    
+    void addWord(string word) {
+        WordDictionary *curr = this;
+        for(char c: word){
+            if(curr->ch[c-'a']==nullptr)
+                curr->ch[c-'a'] = new WordDictionary();
+            curr = curr->ch[c-'a'];
+        }
+        curr->isEndOfWord = true;
+    }
+    
+    bool search(string word) {
+        WordDictionary *curr=this;
+        for(int i=0;i<word.length(); ++i){
+            char c = word[i];
+            if(c=='.'){
+                for(auto a: curr->ch)
+                    if(a && a->search(word.substr(i+1))) return true;
+                return false;
+            }
+            if(curr->ch[c-'a']==nullptr) return false;
+            curr = curr->ch[c-'a'];
+        }
+        return curr && curr->isEndOfWord;
+    }
+};
+
+/**
+ * Your WordDictionary object will be instantiated and called as such:
+ * WordDictionary* obj = new WordDictionary();
+ * obj->addWord(word);
+ * bool param_2 = obj->search(word);
+ */
