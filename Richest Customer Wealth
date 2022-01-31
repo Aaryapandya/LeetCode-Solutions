@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int maximumWealth(vector<vector<int>>& accounts) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
+        
+        int wel=0, sum=0;
+        for(vector<int> i: accounts){
+            sum=0;
+            for(int j: i){
+                sum+=j;
+            }
+            wel = max(wel, sum);
+        }
+        return wel;
+    }
+};
