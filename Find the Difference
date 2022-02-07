@@ -1,0 +1,15 @@
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
+        
+        int a=0, b=0;
+        for(char ch: s)
+            a+=ch;
+        for(char ch: t)
+            b+=ch;
+        return b-a;
+    }
+};
