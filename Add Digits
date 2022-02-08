@@ -1,0 +1,22 @@
+class Solution {
+    int add(int& n){
+        int sum=0;
+        while(n){
+            sum+=n%10;
+            n/=10;
+        }
+        return sum;
+    }
+public:
+    int addDigits(int num) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
+        
+        int r = add(num);
+        while(r>=10)
+            r=add(r);
+        return r;
+    }
+    
+};
