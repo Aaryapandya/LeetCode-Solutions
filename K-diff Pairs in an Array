@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int findPairs(vector<int>& nums, int k) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
+        
+        sort(nums.begin(), nums.end());
+        
+        int result = 0;
+        
+        // Will only ever be of length 2
+        // [ lastLo, lastHi ]
+        vector<int> v;
+    
+        int i = 0, j = 0;
+        int l = nums.size();
+        
+        while(i < l && j < l) {
+            // We don't want to match with itself if 0-diff
+            if (i == j) { j++; }
+            if (j == l) { break; }
+            
+            int lo = nums[i], hi = nums[j];
+
+            if (hi - lo > k) {
+                i++;
+            } else if (hi - lo < k) {
+                j++;
+            } else {
+                if (v.empty() || not (v[0] == lo && v[1] == hi)) { result++; }
+                if (v.empty()) { v = vector<int>(2); }
+                v[0] = lo, v[1] = hi;
+                
+                i++;
+                j++;  
+            }
+        }
+        
+        return result;
+    }
+};
