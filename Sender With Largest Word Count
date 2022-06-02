@@ -1,0 +1,35 @@
+class Solution {
+    int m_len(string me){
+        int c=0;
+        for(char ch: me){
+            if(ch==' '){
+                c++;
+            }
+        }
+        c++;
+        return c;
+    }
+public:
+    string largestWordCount(vector<string>& messages, vector<string>& senders) {
+        map<string, int> m;
+        string ans = senders[0];
+        int max_len = 0;
+        for(int i=0; i<senders.size(); ++i){
+            int j = m_len(messages[i]);
+            m[senders[i]]+=j;
+            if(m[senders[i]]>=max_len){
+                max_len = m[senders[i]];
+                ans = senders[i];
+            }
+        }
+        vector<string> v;
+        for(auto i: m){
+            if(i.second==max_len){
+                v.push_back(i.first);
+            }
+        }
+        sort(v.begin(), v.end());
+        ans = v[v.size()-1];
+        return ans;
+    }
+};
