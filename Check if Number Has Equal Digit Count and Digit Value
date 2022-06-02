@@ -1,0 +1,15 @@
+class Solution {
+public:
+    bool digitCount(string num) {
+        map<int, int> m;
+        for(char ch: num){
+            m[ch-'0']++;
+        }
+        
+        for(int i=0; i<num.length(); ++i){
+            if((num[i]-'0')!=m[i])
+                return false;
+        }
+        return true;
+    }
+};
