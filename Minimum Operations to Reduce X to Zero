@@ -1,0 +1,29 @@
+class Solution {
+public:
+  int minOperations(vector<int>& nums, int x) {
+    int n = nums.size(), result = n+1, left = -1, right = n-1, total = 0;
+    for (; right >= 0; --right) {
+  
+      if (x <= (total += nums[right])) break;
+    }
+    if (right < 0) return -1; // no solution
+      result = (total - x) ? result : (n - right); 
+    
+    for (int i = right; i < n; ++i) {
+      if (x > (total -= nums[i])) {
+	for (++left; left < n; ++left) {
+	  total += nums[left];
+	  if (total >= x) break;
+	}
+      }
+        result = (total - x) ? result : std::min(result, left + n - i);
+    }
+      
+    return ((result <= n) ? result : -1);
+  }
+  
+  Solution() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+  }
+};
