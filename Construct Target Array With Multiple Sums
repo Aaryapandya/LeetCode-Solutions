@@ -1,17 +1,30 @@
 class Solution {
 public:
-    bool isPossible(vector<int>& target) {
-        priority_queue<int> pq;
-        unsigned int sum = 0;
-        for (int num : target)
-            sum += num, pq.push(num);
-        while (pq.top() != 1) {
-            int num = pq.top();
-            pq.pop();
-            sum -= num;
-            if (num <= sum || sum < 1) return false;
-            num %= sum, sum += num, pq.push(num);
+    bool isPossible(vector<int>& target) 
+    {
+        long long sum = 0;
+        priority_queue<long long> pq;
+        
+        for(int item : target)
+        {
+            pq.push((long long)item);
+            sum += item;
         }
-        return true;
+        
+        while(pq.top() != 1)
+        {
+            long long top = pq.top(); pq.pop();
+            
+            sum = sum - top;
+            
+            if(sum <= 0 || sum >= top) return false;
+            
+            top = top % sum;
+            sum += top;
+            
+            pq.push(top > 0 ? top : sum);
+        }
+        
+        return true;    
     }
 };
